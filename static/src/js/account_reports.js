@@ -633,7 +633,7 @@ var accountReportsWidget = AbstractAction.extend({
                 if (this.report_options.analytic_accounts) {
                     fields['analytic_accounts'] = {
                         label: _t('Accounts'),
-                        modelName: 'branch.analytic.branch',
+                        modelName: 'res.branch',
                         value: this.report_options.analytic_accounts.map(Number),
                     };
                 }

@@ -103,7 +103,7 @@ class branch_analytic_report(models.AbstractModel):
                             {'name': self.format_value(account.balance)}],
                 'level': 4,  # todo check redesign financial reports, should be level + 1 but doesn't look good
                 'unfoldable': False,
-                'caret_options': 'branch.analytic.branch',
+                'caret_options': 'res.branch',
                 'parent_id': parent_id,  # to make these fold when the original parent gets folded
             })
 
@@ -118,7 +118,7 @@ class branch_analytic_report(models.AbstractModel):
         date_to = options['date']['date_to']
 
         # context is set because it's used for the debit, credit and balance computed fields
-        BranchAnalyticBranch = self.env['branch.analytic.branch'].with_context(from_date=date_from,
+        BranchAnalyticBranch = self.env['res.branch'].with_context(from_date=date_from,
                                                                                    to_date=date_to)
         # The options refer to analytic entries. So first determine
         # the subset of analytic categories we have to search in.

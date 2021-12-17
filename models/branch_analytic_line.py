@@ -38,6 +38,6 @@ class AccountAnalyticLine(models.Model):
         if self.env.context.get('account_id'):
             return _(
                 "Entries: %(account)s",
-                account=self.env['branch.analytic.branch'].browse(self.env.context['account_id']).name
+                account=self.env['res.branch'].browse(self.env.context['account_id']).name
             )
         return super().view_header_get(view_id, view_type)

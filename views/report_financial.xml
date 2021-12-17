@@ -30,7 +30,7 @@
       <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" action="open_tax_report_line" class="dropdown-item">Audit</a>
     </li>
     <li t-if="line['caret_options'] == 'account.bank.statement'"><a role="menuitem" tabindex="-1" t-att-data-id="line['id']" t-att-data-model="line.get('model', 'account.move.line')" data-object="account.bank.statement" action="open_document" class="dropdown-item">View Bank Statement</a></li>
-    <li t-if="line['caret_options'] == 'branch.analytic.branch'">
+    <li t-if="line['caret_options'] == 'res.branch'">
         <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" action="open_analytic_entries" class="dropdown-item">Analytic Entries</a>
     </li>
     <li t-if="line['caret_options'] == 'res.partner'" role="presentation" id="res.partner.carret"><a role="menuitem" tabindex="-1" t-att-data-id="line['id']" t-att-data-model="line.get('model', 'res.partner')" data-object="res.partner" action="open_document" class="dropdown-item">View Partner</a></li>

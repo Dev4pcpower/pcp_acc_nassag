@@ -446,7 +446,7 @@ class AccountReport(models.AbstractModel):
         if enable_analytic_accounts:
             previous_analytic_accounts = (previous_options or {}).get('analytic_accounts', [])
             analytic_account_ids = [int(x) for x in previous_analytic_accounts]
-            selected_analytic_accounts = self.env['branch.analytic.branch'].search([('id', 'in', analytic_account_ids)])
+            selected_analytic_accounts = self.env['res.branch'].search([('id', 'in', analytic_account_ids)])
             options['analytic_accounts'] = selected_analytic_accounts.ids
             options['selected_analytic_account_names'] = selected_analytic_accounts.mapped('name')
 
@@ -1106,7 +1106,7 @@ class AccountReport(models.AbstractModel):
         if options.get('journals'):
             ctx['journal_ids'] = [j.get('id') for j in options.get('journals') if j.get('selected')]
         if options.get('analytic_accounts'):
-            ctx['analytic_account_ids'] = self.env['branch.analytic.branch'].browse([int(acc) for acc in options['analytic_accounts']])
+            ctx['analytic_account_ids'] = self.env['res.branch'].browse([int(acc) for acc in options['analytic_accounts']])
         if options.get('analytic_tags'):
             ctx['branch_analytic_tag_ids'] = self.env['branch.analytic.tag'].browse([int(t) for t in options['analytic_tags']])
         if options.get('partner_ids'):
@@ -1133,7 +1133,7 @@ class AccountReport(models.AbstractModel):
         searchview_dict = {'options': options, 'context': self.env.context}
         # Check if report needs analytic
         if options.get('analytic_accounts') is not None:
-            options['selected_analytic_account_names'] = [self.env['branch.analytic.branch'].browse(int(account)).name for account in options['analytic_accounts']]
+            options['selected_analytic_account_names'] = [self.env['res.branch'].browse(int(account)).name for account in options['analytic_accounts']]
         if options.get('analytic_tags') is not None:
             options['selected_analytic_tag_names'] = [self.env['branch.analytic.tag'].browse(int(tag)).name for tag in options['analytic_tags']]
         if options.get('partner'):

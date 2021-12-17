@@ -20,7 +20,7 @@ class TestAccountAnalyticAccount(AccountTestInvoicingCommon):
         # By default, tests are run with the current user set on the first company.
         cls.env.user.company_id = cls.company_data['company']
 
-        cls.test_analytic_account = cls.env['branch.analytic.branch'].create({'name': 'test_analytic_account'})
+        cls.test_analytic_account = cls.env['res.branch'].create({'name': 'test_analytic_account'})
         cls.test_analytic_tag = cls.env['branch.analytic.tag'].create({'name': 'test_analytic_tag'})
 
     def test_changing_analytic_company(self):
