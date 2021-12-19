@@ -1240,8 +1240,8 @@ class AccountReport(models.AbstractModel):
 
     def _get_reports_buttons(self):
         return [
-
-
+            {'name': _('Print Preview'), 'sequence': 1, 'action': 'open_report_export_wizard', 'file_export_type': _('PDF')},
+            {'name': _('Export (XLSX)'), 'sequence': 2, 'action': 'open_report_export_wizard', 'file_export_type': _('XLSX')},
             {'name':_('Save'), 'sequence': 10, 'action': 'open_report_export_wizard'},
         ]
 

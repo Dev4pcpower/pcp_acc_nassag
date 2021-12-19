@@ -316,7 +316,7 @@ class BrachAnalyticBranch(models.Model):
             account.credit = data_credit.get(account.id, 0.0)
             account.balance = account.credit - account.debit
 
-    name = fields.Char(string='Analytic Branch', index=True, required=True, tracking=True)
+
     code = fields.Char(string='Reference', index=True, tracking=True)
     active = fields.Boolean('Active',
                             help="If the active field is set to False, it will allow you to hide the account without removing it.",
