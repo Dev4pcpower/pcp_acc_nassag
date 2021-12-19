@@ -34,7 +34,9 @@
         'views/branch_analytic_line.xml',
         'views/report_financial.xml',
         'views/search_template_view.xml',
-
+        'wizard/multicurrency_revaluation.xml',
+        'wizard/report_export_wizard.xml',
+        'wizard/fiscal_year.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

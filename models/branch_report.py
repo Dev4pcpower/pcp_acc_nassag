@@ -917,7 +917,7 @@ class AccountReport(models.AbstractModel):
             account_id = self._get_caret_option_target_id(params.get('id', 0))
             options = dict(options)
             options['unfolded_lines'] = ['account_%s' % account_id]
-        action_vals = self.env['ir.actions.actions']._for_xml_id('pcp_acc_nassag.action_branch_report_general_ledger')
+        action_vals = self.env['ir.actions.actions']._for_xml_id('account_reports.action_account_report_general_ledger')
         action_vals['params'] = {
             'options': options,
             'ignore_session': 'read',
@@ -1160,7 +1160,7 @@ class AccountReport(models.AbstractModel):
                 'footnotes': [{'id': f.id, 'line': f.line, 'text': f.text} for f in report_manager.footnotes_ids],
                 'buttons': self._get_reports_buttons_in_sequence(),
                 'main_html': self.get_html(options),
-                'searchview_html': self.env['ir.ui.view']._render_template(self._get_templates().get('search_template', 'pcp_acc_nassag.search_template'), values=searchview_dict),
+                'searchview_html': self.env['ir.ui.view']._render_template(self._get_templates().get('search_template', 'account_reports.search_template'), values=searchview_dict),
                 }
         return info
 
@@ -1230,7 +1230,7 @@ class AccountReport(models.AbstractModel):
         return html
 
     def get_html_footnotes(self, footnotes):
-        template = self._get_templates().get('footnotes_template', 'pcp_acc_nassag.footnotes_template')
+        template = self._get_templates().get('footnotes_template', 'account_reports.footnotes_template')
         rcontext = {'footnotes': footnotes, 'context': self.env.context}
         html = self.env['ir.ui.view']._render_template(template, values=dict(rcontext))
         return html
@@ -1240,8 +1240,8 @@ class AccountReport(models.AbstractModel):
 
     def _get_reports_buttons(self):
         return [
-            {'name': _('Print Preview'), 'sequence': 1, 'action': 'print_pdf', 'file_export_type': _('PDF')},
-            {'name': _('Export (XLSX)'), 'sequence': 2, 'action': 'print_xlsx', 'file_export_type': _('XLSX')},
+
+
             {'name':_('Save'), 'sequence': 10, 'action': 'open_report_export_wizard'},
         ]
 
@@ -1251,15 +1251,15 @@ class AccountReport(models.AbstractModel):
         the context, containing the current options selected on this report
         (which must hence be taken into account when exporting it to a file).
         """
-        new_wizard = self.env['pcp_acc_nassag.export.wizard'].create({'report_model': self._name,'report_id': self.id})
-        view_id = self.env.ref('pcp_acc_nassag.view_report_export_wizard').id
+        new_wizard = self.env['account_reports.export.wizard'].create({'report_model': self._name,'report_id': self.id})
+        view_id = self.env.ref('account_reports.view_report_export_wizard').id
         new_context = self.env.context.copy()
-        new_context['branch_report_generation_options'] = options
+        new_context['account_report_generation_options'] = options
         return {
             'type': 'ir.actions.act_window',
             'name': _('Export'),
             'view_mode': 'form',
-            'res_model': 'pcp_acc_nassag.export.wizard',
+            'res_model': 'account_reports.export.wizard',
             'target': 'new',
             'res_id': new_wizard.id,
             'views': [[view_id, 'form']],
@@ -1348,7 +1348,7 @@ class AccountReport(models.AbstractModel):
 
     def print_pdf(self, options):
         return {
-                'type': 'ir_actions_branch_report_download',
+                'type': 'ir_actions_account_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'pdf',
@@ -1382,7 +1382,7 @@ class AccountReport(models.AbstractModel):
         }
 
         body = self.env['ir.ui.view']._render_template(
-            "pcp_acc_nassag.print_template",
+            "account_reports.print_template",
             values=dict(rcontext),
         )
         body_html = self.with_context(print_mode=True).get_html(options)
@@ -1436,7 +1436,7 @@ class AccountReport(models.AbstractModel):
 
     def print_xlsx(self, options):
         return {
-                'type': 'ir_actions_branch_report_download',
+                'type': 'ir_actions_account_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'xlsx',
@@ -1552,7 +1552,7 @@ class AccountReport(models.AbstractModel):
 
     def print_xml(self, options):
         return {
-                'type': 'ir_actions_branch_report_download',
+                'type': 'ir_actions_account_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'xml',
@@ -1565,7 +1565,7 @@ class AccountReport(models.AbstractModel):
 
     def print_txt(self, options):
         return {
-                'type': 'ir_actions_branch_report_download',
+                'type': 'ir_actions_account_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'txt',
