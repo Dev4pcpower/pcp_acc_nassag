@@ -28,14 +28,12 @@
         'security/analytic_security.xml',
         'security/ir.model.access.csv',
         'views/menu_item.xml',
+        'views/assets.xml',
         'views/analytic_branch.xml',
         'views/account_move.xml',
         'views/branch_analytic_line.xml',
         'views/report_financial.xml',
         'views/search_template_view.xml',
-        'wizard/multicurrency_revaluation.xml',
-        'wizard/report_export_wizard.xml',
-        'wizard/fiscal_year.xml',
 
     ],
     # only loaded in demonstration mode

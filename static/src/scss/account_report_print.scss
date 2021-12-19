@@ -1,4 +1,4 @@
-.o_account_reports_summary_edit {
+.o_pcp_acc_nassag_summary_edit {
     display: none !important;
 }
 .caret {
@@ -7,18 +7,18 @@
 .dropdown-toggle::after {
     display: none !important;
 }
-.o_account_reports_body_print {
+.o_pcp_acc_nassag_body_print {
     background-color: white !important;
     color: black !important;
     font-size: 12px !important;
-    .o_account_reports_header {
+    .o_pcp_acc_nassag_header {
         padding: 10px;
         background-color: #eee;
     }
-    .o_account_reports_page {
+    .o_pcp_acc_nassag_page {
         color: black !important;
     }
-    .o_account_reports_table {
+    .o_pcp_acc_nassag_table {
         margin-bottom: 0px;
         font-size: 12px !important;
         white-space: nowrap !important;
@@ -27,7 +27,7 @@
             page-break-inside: avoid;
         }
     }
-    .o_account_reports_level0, .o_account_reports_level1, .o_account_reports_level2, .o_account_reports_domain_total, .total {
+    .o_pcp_acc_nassag_level0, .o_pcp_acc_nassag_level1, .o_pcp_acc_nassag_level2, .o_pcp_acc_nassag_domain_total, .total {
         .text-muted {
             color: black !important;
         }

@@ -1,4 +1,4 @@
-odoo.define('pcp_acc_nassag.account_reports_tests', function (require) {
+odoo.define('pcp_acc_nassag.pcp_acc_nassag_tests', function (require) {
 "use strict";
 
 var testUtils = require('web.test_utils');
@@ -16,7 +16,7 @@ QUnit.module('Account Reports', {
                 },
                 output_format: 'pdf',
             },
-            type: 'ir_actions_account_report_download',
+            type: 'ir_actions_branch_report_download',
         }];
     },
 }, function () {
@@ -61,7 +61,7 @@ QUnit.module('Account Reports', {
         var actionManager = await createActionManager({
             actions: [{
                 id: 9,
-                tag: 'account_report',
+                tag: 'branch_report',
                 type: 'ir.actions.client',
             }],
             data: {
@@ -96,7 +96,7 @@ QUnit.module('Account Reports', {
                             '<span class="caret" />' +
                             '</a>' +
                             '<ul class="dropdown-menu o_filter_menu" role="menu">' +
-                            '<li class="o_account_report_search js_account_partner_m2m"/>' +
+                            '<li class="o_branch_report_search js_account_partner_m2m"/>' +
                             '</ul>',
                     };
                     var reportOptions;

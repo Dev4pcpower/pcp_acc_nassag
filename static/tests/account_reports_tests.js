@@ -1,4 +1,4 @@
-odoo.define('pcp_acc_nassag/static/tests/account_reports_tests', function (require) {
+odoo.define('pcp_acc_nassag/static/tests/pcp_acc_nassag_tests', function (require) {
     "use strict";
 
     const ControlPanel = require('web.ControlPanel');
@@ -34,7 +34,7 @@ odoo.define('pcp_acc_nassag/static/tests/account_reports_tests', function (requi
                     {
                         id: 42,
                         name: "Account reports",
-                        tag: 'account_report',
+                        tag: 'branch_report',
                         type: 'ir.actions.client',
                     },
                 ],

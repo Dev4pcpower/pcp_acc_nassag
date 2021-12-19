@@ -1,22 +1,22 @@
-odoo.define('account_reports_widgets.tour', function (require) {
+odoo.define('pcp_acc_nassag_widgets.tour', function (require) {
 "use strict";
 
 var tour = require('web_tour.tour');
 
-tour.register('account_reports_widgets', {
+tour.register('pcp_acc_nassag_widgets', {
     test: true,
-    url: '/web?#action=pcp_acc_nassag.action_account_report_pnl',
+    url: '/web?#action=pcp_acc_nassag.action_branch_report_pnl',
 },
     [
         {
             content: "wait web client",
-            trigger: ".o_account_reports_body",
+            trigger: ".o_pcp_acc_nassag_body",
             extra_trigger: ".breadcrumb",
             run: function () {}
         },
         {
             content: "unfold line",
-            trigger: '.js_account_report_foldable:first',
+            trigger: '.js_branch_report_foldable:first',
             run: 'click',
         },
         {
@@ -25,17 +25,17 @@ tour.register('account_reports_widgets', {
         },
         {
             content: 'Open dropdown menu of one of the unfolded line',
-            trigger: '[data-parent-id] .o_account_report_line a:first',
+            trigger: '[data-parent-id] .o_branch_report_line a:first',
             run: 'click',
         },
         {
             content: 'click on the annotate action',
-            trigger: '[data-parent-id] .o_account_report_line .o_account_reports_domain_dropdown:first .js_account_reports_add_footnote',
+            trigger: '[data-parent-id] .o_branch_report_line .o_pcp_acc_nassag_domain_dropdown:first .js_pcp_acc_nassag_add_footnote',
             run: 'click',
         },
         {
             content: 'insert footnote text',
-            trigger: '.js_account_reports_footnote_note',
+            trigger: '.js_pcp_acc_nassag_footnote_note',
             run: 'text My awesome footnote!'
         },
         {
@@ -46,24 +46,24 @@ tour.register('account_reports_widgets', {
         {
             content: 'wait for footnote to be saved',
             trigger: '.footnote#footnote1 .text:contains(1. My awesome footnote!)',
-            extra_trigger: '.o_account_reports_footnote_sup a[href="#footnote1"]',
+            extra_trigger: '.o_pcp_acc_nassag_footnote_sup a[href="#footnote1"]',
         },
         {
             content: "change date filter",
-            trigger: ".o_account_reports_filter_date > button",
+            trigger: ".o_pcp_acc_nassag_filter_date > button",
         },
         {
             content: "change date filter",
-            trigger: ".dropdown-item.js_account_report_date_filter[data-filter='last_year']",
+            trigger: ".dropdown-item.js_branch_report_date_filter[data-filter='last_year']",
             run: 'click'
         },
         {
             content: "wait refresh",
-            trigger: ".o_account_reports_level2:last() .o_account_report_column_value:contains(0.00)"
+            trigger: ".o_pcp_acc_nassag_level2:last() .o_branch_report_column_value:contains(0.00)"
         },
         {
             content: "change comparison filter",
-            trigger: ".o_account_reports_filter_date_cmp > button"
+            trigger: ".o_pcp_acc_nassag_filter_date_cmp > button"
         },
         {
             content: "change comparison filter",
@@ -71,7 +71,7 @@ tour.register('account_reports_widgets', {
         },
         {
             content: "change comparison filter",
-            trigger: ".js_account_report_date_cmp_filter[data-filter='previous_period']",
+            trigger: ".js_branch_report_date_cmp_filter[data-filter='previous_period']",
             run: 'click',
         },
         {
@@ -80,7 +80,7 @@ tour.register('account_reports_widgets', {
         },
         {
             content: "change boolean filter",
-            trigger: ".o_account_reports_filter_bool > button",
+            trigger: ".o_pcp_acc_nassag_filter_bool > button",
         },
         {
             title: "export xlsx",

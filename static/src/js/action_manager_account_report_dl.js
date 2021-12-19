@@ -3,7 +3,7 @@ odoo.define('pcp_acc_nassag.ActionManager', function (require) {
 
 /**
  * The purpose of this file is to add the support of Odoo actions of type
- * 'ir_actions_account_report_download' to the ActionManager.
+ * 'ir_actions_branch_report_download' to the ActionManager.
  */
 
 var ActionManager = require('web.ActionManager');
@@ -16,7 +16,7 @@ ActionManager.include({
     //--------------------------------------------------------------------------
 
     /**
-     * Executes actions of type 'ir_actions_account_report_download'.
+     * Executes actions of type 'ir_actions_branch_report_download'.
      *
      * @private
      * @param {Object} action the description of the action to execute
@@ -40,13 +40,13 @@ ActionManager.include({
         });
     },
     /**
-     * Overrides to handle the 'ir_actions_account_report_download' actions.
+     * Overrides to handle the 'ir_actions_branch_report_download' actions.
      *
      * @override
      * @private
      */
     _handleAction: function (action, options) {
-        if (action.type === 'ir_actions_account_report_download') {
+        if (action.type === 'ir_actions_branch_report_download') {
             return this._executeAccountReportDownloadAction(action, options);
         }
         return this._super.apply(this, arguments);
