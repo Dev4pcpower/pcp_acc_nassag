@@ -28,10 +28,11 @@ ActionManager.include({
         framework.blockUI();
         return new Promise(function (resolve, reject) {
             session.get_file({
-                url: '/pcp_acc_nassag',
+                url: '/branch_reports',
                 data: action.data,
                 success: resolve,
                 error: (error) => {
+                    console.log("jhjkhj");
                     self.call('crash_manager', 'rpc_error', error);
                     reject();
                 },

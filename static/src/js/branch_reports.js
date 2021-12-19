@@ -29,6 +29,7 @@ var M2MFilters = Widget.extend(StandaloneFieldManagerMixin, {
     /**
      * @override
      */
+
     willStart: function () {
         var self = this;
         var defs = [this._super.apply(this, arguments)];
@@ -112,7 +113,7 @@ var M2MFilters = Widget.extend(StandaloneFieldManagerMixin, {
     },
 });
 
-var accountReportsWidget = AbstractAction.include({
+var accountReportsWidget = AbstractAction.extend({
     hasControlPanel: true,
 
     events: {
@@ -147,7 +148,7 @@ var accountReportsWidget = AbstractAction.include({
         this.actionManager = parent;
         this.report_model = action.context.model;
         if (this.report_model === undefined) {
-            this.report_model = 'account.report';
+            this.report_model = 'branch.report';
         }
         this.financial_id = false;
         if (action.context.id) {
@@ -531,7 +532,7 @@ var accountReportsWidget = AbstractAction.include({
         var self = this;
         var text = $(e.target).siblings().val().replace(/[ \t]+/g, ' ');
         return this._rpc({
-                model: 'account.report.manager',
+                model: 'branch.report.manager',
                 method: 'write',
                 args: [this.report_manager_id, {summary: text}],
                 context: this.odoo_context,
@@ -593,7 +594,7 @@ var accountReportsWidget = AbstractAction.include({
         if (existing_footnote.length !== 0) {
             text = existing_footnote[0].text;
         }
-        var $content = $(QWeb.render('accountReports.footnote_dialog', {text: text, line: line_id}));
+        var $content = $(QWeb.render('pcp_acc_nassag.footnote_dialog', {text: text, line: line_id}));
         var save = function() {
             var footnote_text = $('.js_account_reports_footnote_note').val().replace(/[ \t]+/g, ' ');
             if (!footnote_text && existing_footnote.length === 0) {return;}
@@ -603,7 +604,7 @@ var accountReportsWidget = AbstractAction.include({
                 }
                 // replace text of existing footnote
                 return this._rpc({
-                        model: 'account.report.footnote',
+                        model: 'branch.report.footnote',
                         method: 'write',
                         args: [existing_footnote[0].id, {text: footnote_text}],
                         context: this.odoo_context,
@@ -620,7 +621,7 @@ var accountReportsWidget = AbstractAction.include({
             else {
                 // new footnote
                 return this._rpc({
-                        model: 'account.report.footnote',
+                        model: 'branch.report.footnote',
                         method: 'create',
                         args: [{line: line_id, text: footnote_text, manager_id: self.report_manager_id}],
                         context: this.odoo_context,
@@ -637,7 +638,7 @@ var accountReportsWidget = AbstractAction.include({
         var self = this;
         var footnote_id = $(e.target).parents('.footnote').data('id');
         return this._rpc({
-                model: 'account.report.footnote',
+                model: 'branch.report.footnote',
                 method: 'unlink',
                 args: [footnote_id],
                 context: this.odoo_context,

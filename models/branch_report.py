@@ -569,7 +569,7 @@ class AccountReport(models.AbstractModel):
                 'level': level,
                 'parent_id': parent_id,
                 'columns': [{'name': self.format_value(c) if isinstance(c, (int, float)) else c, 'no_format_name': c} for c in val_dict['totals']],
-                'name_class': 'o_account_report_name_ellipsis top-vertical-align'
+                'name_class': 'o_branch_report_name_ellipsis top-vertical-align'
             })
             if not self._context.get('print_mode') or unfolded:
                 # add every direct child group recursively
@@ -782,7 +782,7 @@ class AccountReport(models.AbstractModel):
         action_read = clean_action(action.read()[0], env=action.env)
         if action_type == 'ir.actions.client':
             # Check if we are opening another report and if yes, pass options and ignore_session
-            if action.tag == 'account_report':
+            if action.tag == 'branch_report':
                 options['unfolded_lines'] = []
                 options['unfold_all'] = False
                 action_read.update({'params': {'options': options, 'ignore_session': 'read'}})
@@ -917,7 +917,7 @@ class AccountReport(models.AbstractModel):
             account_id = self._get_caret_option_target_id(params.get('id', 0))
             options = dict(options)
             options['unfolded_lines'] = ['account_%s' % account_id]
-        action_vals = self.env['ir.actions.actions']._for_xml_id('pcp_acc_nassag.action_account_report_general_ledger')
+        action_vals = self.env['ir.actions.actions']._for_xml_id('pcp_acc_nassag.action_branch_report_general_ledger')
         action_vals['params'] = {
             'options': options,
             'ignore_session': 'read',
@@ -1226,7 +1226,7 @@ class AccountReport(models.AbstractModel):
             for k,v in self._replace_class().items():
                 html = html.replace(k, v)
             # append footnote as well
-            html = html.replace(b'<div class="js_account_report_footnotes"></div>', self.get_html_footnotes(footnotes_to_render))
+            html = html.replace(b'<div class="js_branch_report_footnotes"></div>', self.get_html_footnotes(footnotes_to_render))
         return html
 
     def get_html_footnotes(self, footnotes):
@@ -1254,7 +1254,7 @@ class AccountReport(models.AbstractModel):
         new_wizard = self.env['pcp_acc_nassag.export.wizard'].create({'report_model': self._name,'report_id': self.id})
         view_id = self.env.ref('pcp_acc_nassag.view_report_export_wizard').id
         new_context = self.env.context.copy()
-        new_context['account_report_generation_options'] = options
+        new_context['branch_report_generation_options'] = options
         return {
             'type': 'ir.actions.act_window',
             'name': _('Export'),
@@ -1348,7 +1348,7 @@ class AccountReport(models.AbstractModel):
 
     def print_pdf(self, options):
         return {
-                'type': 'ir_actions_account_report_download',
+                'type': 'ir_actions_branch_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'pdf',
@@ -1436,7 +1436,7 @@ class AccountReport(models.AbstractModel):
 
     def print_xlsx(self, options):
         return {
-                'type': 'ir_actions_account_report_download',
+                'type': 'ir_actions_branch_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'xlsx',
@@ -1552,7 +1552,7 @@ class AccountReport(models.AbstractModel):
 
     def print_xml(self, options):
         return {
-                'type': 'ir_actions_account_report_download',
+                'type': 'ir_actions_branch_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'xml',
@@ -1565,7 +1565,7 @@ class AccountReport(models.AbstractModel):
 
     def print_txt(self, options):
         return {
-                'type': 'ir_actions_account_report_download',
+                'type': 'ir_actions_branch_report_download',
                 'data': {'model': self.env.context.get('model'),
                          'options': json.dumps(options),
                          'output_format': 'txt',

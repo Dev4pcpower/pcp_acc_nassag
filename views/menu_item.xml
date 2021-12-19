@@ -14,7 +14,7 @@
         </record>
         <record id="action_branch_report_coa" model="ir.actions.client">
             <field name="name">Trial Balance Branch</field>
-            <field name="tag">account_report</field>
+            <field name="tag">branch_report</field>
             <field name="context" eval="{'model': 'branch.analytic.report'}" />
         </record>
 

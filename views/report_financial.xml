@@ -144,16 +144,16 @@
 
 <template id="line_template">
     <t t-foreach="lines['lines']" t-as="line">
-        <t t-set="trclass" t-value="'o_account_reports_default_style'"/>
-        <t t-set="domainClass" t-value="'o_account_reports_domain_line_2 account_report_line_name'"/>
+        <t t-set="trclass" t-value="'o_pcp_acc_nassag_default_style'"/>
+        <t t-set="domainClass" t-value="'o_pcp_acc_nassag_domain_line_2 account_report_line_name'"/>
         <t t-if="not line.get('caret_options')">
             <t t-if="line.get('level') != None">
-                <t t-set="trclass" t-value="'o_account_searchable_line o_account_reports_level'+str(line['level'])"/>
+                <t t-set="trclass" t-value="'o_account_searchable_line o_pcp_acc_nassag_level'+str(line['level'])"/>
             </t>
         </t>
         <t t-if="line.get('caret_options')">
             <t t-if="line.get('level')">
-                <t t-set="domainClass" t-value="'o_account_reports_domain_line_'+str(line['level'])"/>
+                <t t-set="domainClass" t-value="'o_pcp_acc_nassag_domain_line_'+str(line['level'])"/>
             </t>
         </t>
 
@@ -166,13 +166,13 @@
             t-att-data-offset="line.get('offset', False)" t-att-data-progress="line.get('progress', False)" t-att-data-remaining="line.get('remaining', False)"
             >
                     <t t-if="line.get('unfoldable')">
-                        <span t-att-data-id="line['id']" class="o_account_reports_caret_icon">
+                        <span t-att-data-id="line['id']" class="o_pcp_acc_nassag_caret_icon">
                             <i class="fa fa-caret-down" t-if="line.get('unfolded')" role="img" aria-label="Unfolded" title="Unfolded"/>
                             <i class="fa fa-caret-right" t-if="not line.get('unfolded')" role="img" aria-label="Folded" title="Folded"/>
                         </span>
                     </t>
                     <t t-elif="not line.get('caret_options')">
-                        <span t-att-data-id="line['id']" class="o_account_reports_caret_icon">
+                        <span t-att-data-id="line['id']" class="o_pcp_acc_nassag_caret_icon">
                             <i class="fa fa-caret-right invisible" role="img" aria-label="Unfolded" title="Unfolded"/>
                         </span>
                     </t>
@@ -183,7 +183,7 @@
                                 </a>
                                 <t t-if="not line.get('action_id')" t-esc="line.get('name')"/>
                                 <span class="js_account_report_line_footnote" t-att-data-id="line['id']">
-                                    <sup t-if="line.get('footnote')"><b class="o_account_reports_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup>
+                                    <sup t-if="line.get('footnote')"><b class="o_pcp_acc_nassag_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup>
                                 </span>
                             </span>
                     </t>
@@ -195,10 +195,10 @@
                                         <t t-esc="line.get('name')"/>
                                     </span>
                                 </a>
-                                <span class="js_account_report_line_footnote" t-att-data-id="line['id']"><sup t-if="line.get('footnote')"><b class="o_account_reports_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup></span>
-                                <div class="dropdown-menu o_account_reports_domain_dropdown" role="menu">
+                                <span class="js_account_report_line_footnote" t-att-data-id="line['id']"><sup t-if="line.get('footnote')"><b class="o_pcp_acc_nassag_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup></span>
+                                <div class="dropdown-menu o_pcp_acc_nassag_domain_dropdown" role="menu">
                                     <t t-call="pcp_acc_nassag.line_caret_options"/>
-                                    <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" class="dropdown-item js_account_reports_add_footnote">Annotate</a>
+                                    <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" class="dropdown-item js_pcp_acc_nassag_add_footnote">Annotate</a>
                                 </div>
                             </div>
                         </t>
@@ -206,7 +206,7 @@
                             <span t-att-data-id="line['id']" t-att-class="domainClass" t-att-title="line.get('title_hover')">
                                 <t t-esc="line.get('name')"/>
                             </span>
-                            <span class="js_account_report_line_footnote" t-att-data-id="line['id']"><sup t-if="line.get('footnote')"><b class="o_account_reports_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup></span>
+                            <span class="js_account_report_line_footnote" t-att-data-id="line['id']"><sup t-if="line.get('footnote')"><b class="o_pcp_acc_nassag_footnote_sup"><a t-att-href="'#footnote'+line['footnote']"></a><t t-esc="line['footnote']"/></b></sup></span>
                         </t>
                     </t>
             </td>
@@ -228,7 +228,7 @@
 </template>
 
 <template id="main_table_header">
-    <thead class="o_account_reports_header_hierarchy">
+    <thead class="o_pcp_acc_nassag_header_hierarchy">
         <t t-foreach="lines.get('columns_header')" t-as="header_line">
             <tr>
                 <t t-foreach="header_line" t-as="cell">
@@ -246,21 +246,21 @@
 </template>
 
 <template id="main_template">
-    <div class='o_account_reports_body'>
+    <div class='o_pcp_acc_nassag_body'>
         <div id="warnings_div">
             <div class="alert alert-info text-center mb-0 no_print" t-if="not options.get('all_entries') and options.get('unposted_in_period')">
                 <span>There are <a action="open_unposted_moves">unposted Journal Entries</a> prior or included in this period</span>
             </div>
         </div>
-        <div class="o_account_reports_page o_account_reports_no_print">
+        <div class="o_pcp_acc_nassag_page o_pcp_acc_nassag_no_print">
 
-            <div class="o_account_reports_header">
+            <div class="o_pcp_acc_nassag_header">
                 <div class="print_only"><h2><t t-esc="report.get('name')"></t></h2></div>
                 <t t-call="pcp_acc_nassag.filter_info_template"/>
             </div>
-            <div class="o_account_reports_summary"/>
+            <div class="o_pcp_acc_nassag_summary"/>
             <div class="table-responsive">
-                <table class="o_account_reports_table table-hover">
+                <table class="o_pcp_acc_nassag_table table-hover">
                     <t t-call="{{model._get_templates()['main_table_header_template']}}"/>
                     <tbody>
                         <t t-if="lines.get('lines')">
@@ -293,13 +293,13 @@
     <xpath expr="//div[hasclass('print_only')]" position="after">
         <div class="o_reports_filter_input_wrapper no_print">
             <span class="searchIcon"><i class="fa fa-search" role="img" aria-label="Search" title="Search"></i></span>
-            <input class="o_account_reports_filter_input" type="text" placeholder="Search account" />
+            <input class="o_pcp_acc_nassag_filter_input" type="text" placeholder="Search account" />
         </div>
     </xpath>
 </template>
 
 <template id="main_template_with_filter_input_partner" inherit_id="pcp_acc_nassag.main_template_with_filter_input_accounts"  primary="True">
-    <xpath expr="//input[hasclass('o_account_reports_filter_input')]" position="attributes">
+    <xpath expr="//input[hasclass('o_pcp_acc_nassag_filter_input')]" position="attributes">
         <attribute name="placeholder">Search partner</attribute>
     </xpath>
 </template>
@@ -334,7 +334,7 @@
 
 <!-- Aged partner balance templates -->
 <template id="template_aged_partner_balance_line_report" inherit_id="pcp_acc_nassag.line_template" primary="True">
-    <xpath expr="//span[hasclass('o_account_reports_caret_icon')]" position="before">
+    <xpath expr="//span[hasclass('o_pcp_acc_nassag_caret_icon')]" position="before">
         <t t-if="line.get('trust') == 'good'">
             <span class="fa fa-circle color-green trust-partner" role="img" aria-label="Balance is good" title="Balance is good"></span>
         </t>
@@ -352,7 +352,7 @@
 
 <template id="template_aged_partner_balance_report" inherit_id="pcp_acc_nassag.main_template" primary="True">
     <xpath expr="//table" position="attributes">
-        <attribute name="class">o_account_reports_table table-striped table-hover</attribute>
+        <attribute name="class">o_pcp_acc_nassag_table table-striped table-hover</attribute>
     </xpath>
 </template>
 
@@ -372,7 +372,7 @@
 
 <!-- partner and general ledger templates -->
 <template id="line_template_partner_ledger_report" inherit_id="pcp_acc_nassag.line_template" primary="True">
-    <xpath expr="//span[hasclass('o_account_reports_caret_icon')]" position="before">
+    <xpath expr="//span[hasclass('o_pcp_acc_nassag_caret_icon')]" position="before">
         <t t-if="line.get('trust') == 'good'">
             <span class="fa fa-circle color-green trust-partner" role="img" aria-label="Partner ledger is good" title="Partner ledger is good"></span>
         </t>
@@ -394,14 +394,14 @@
     <xpath expr="//span[hasclass('account_report_line_name')]" position="inside">
         &amp;nbsp;<a t-if="'hierarchy' not in str(line.get('id')) and line.get('unfolded')" t-att-data-id="line.get('id')" action="view_all_journal_items" class="no_print oe_link_reports"> ⇒ journal items</a>
     </xpath>
-    <xpath expr="//div[hasclass('o_account_reports_domain_dropdown')]/*[last()]" position="before">
+    <xpath expr="//div[hasclass('o_pcp_acc_nassag_domain_dropdown')]/*[last()]" position="before">
         <t t-if="line['caret_options'] != 'account.tax' and line['caret_options'] != 'account.account'"><a role="menuitem" tabindex="-1" t-att-data-id="line['id']" action="open_document" class="dropdown-item">View Journal Entry</a></t>
     </xpath>
 </template>
 
 <!-- multicurrency revaluation report templates -->
 <template id="template_multicurrency_report" inherit_id="pcp_acc_nassag.main_template" primary="True">
-    <xpath expr="//div[hasclass('o_account_reports_page')]" position="before">
+    <xpath expr="//div[hasclass('o_pcp_acc_nassag_page')]" position="before">
         <div class="alert alert-warning text-center mb-0 no_print" t-if="options.get('custom_rate')">
             <span>You are using custom exchange rates.
             <a type="button" class="btn btn btn-link js_account_report_custom_currency" style="padding: 0; vertical-align=baseline;" data-filter='current_currency'>⇒ Reset to Odoo’s Rate</a></span>
@@ -425,8 +425,8 @@
     <t t-call="web._assets_helpers"/>
     <t t-call="web._assets_bootstrap"/>
     <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/fonts.scss"/>
-    <link rel="stylesheet" type="text/scss" href="/account_reports/static/src/scss/account_financial_report.scss"/>
-    <link rel="stylesheet" type="text/scss" href="/account_reports/static/src/scss/account_report_print.scss"/>
+    <link rel="stylesheet" type="text/scss" href="/pcp_acc_nassag/static/src/scss/account_financial_report.scss"/>
+    <link rel="stylesheet" type="text/scss" href="/pcp_acc_nassag/static/src/scss/account_report_print.scss"/>
 </template>
 
 <!-- This template is only used when printing a financial report to a PDF output -->
@@ -437,7 +437,7 @@
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <t t-call-assets="pcp_acc_nassag.assets_financial_report" t-js="False"/>
         </head>
-        <body class="o_account_reports_body_print">
+        <body class="o_pcp_acc_nassag_body_print">
         </body>
     </html>
 </template>

@@ -2,13 +2,13 @@
 
 <templates>
 
-    <t t-name="pcp_acc_nassag.footnote_dialog">
+    <t t-name="accountReports.footnote_dialog">
         <form role="form">
-            <textarea name="note" rows='4' class="js_pcp_acc_nassag_footnote_note" t-att-data-line="id" placeholder="Insert foot note here"><t t-esc="text"/></textarea>
+            <textarea name="note" rows='4' class="js_account_reports_footnote_note" t-att-data-line="id" placeholder="Insert foot note here"><t t-esc="text"/></textarea>
         </form>
     </t>
 
-    <t t-name="pcp_acc_nassag.buttons">
+    <t t-name="accountReports.buttons">
         <t t-foreach="buttons" t-as="button">
             <button type="button" class="btn btn-primary" t-att-action="button.action"><t t-esc="button.name"/></button>
         </t>
@@ -17,7 +17,7 @@
     <div t-name='paymentDateForm'>
         <form role="form">
             <label for="expectedDate">Expected Payment Date</label>
-            <div class='o_pcp_acc_nassag_payment_date_picker' />
+            <div class='o_account_reports_payment_date_picker' />
             <input type="hidden" id='target_id' t-att-value='target_id' />
         </form>
     </div>
@@ -31,7 +31,7 @@
         </table>
     </div>
 
-    <t t-name="pcp_acc_nassag.FinancialReportInfosTemplate">
+    <t t-name="accountReports.FinancialReportInfosTemplate">
         <table>
             <tr>
                 <td><strong>Name: </strong></td>

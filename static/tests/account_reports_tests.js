@@ -68,7 +68,7 @@ odoo.define('pcp_acc_nassag/static/tests/pcp_acc_nassag_tests', function (requir
                                 [false, "form"],
                             ],
                         });
-                    } else if (route === '/web/dataset/call_kw/account.report/get_html_footnotes') {
+                    } else if (route === '/web/dataset/call_kw/branch.report/get_html_footnotes') {
                         return Promise.resolve("");
                     }
                     return this._super.apply(this, arguments);
