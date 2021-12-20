@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['branch','branch_accounting_report'],
+    'depends': ['account','branch','branch_accounting_report'],
 
     # always loaded
     'data': [
