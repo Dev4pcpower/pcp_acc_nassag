@@ -16,7 +16,7 @@ QUnit.module('Account Reports', {
                 },
                 output_format: 'pdf',
             },
-            type: 'ir_actions_branch_report_download',
+            type: 'ir_actions_account_report_download',
         }];
     },
 }, function () {
