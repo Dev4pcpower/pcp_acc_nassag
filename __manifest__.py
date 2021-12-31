@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['account','branch','branch_accounting_report'],
+    'depends': ['account','branch','branch_accounting_report','sale_management'],
 
     # always loaded
     'data': [
@@ -34,6 +34,8 @@
         'views/branch_analytic_line.xml',
         'views/report_financial.xml',
         'views/search_template_view.xml',
+        'wizard/commission_invoice_wizard.xml',
+        'views/sale_order_commission_invoice.xml',
         'wizard/multicurrency_revaluation.xml',
         'wizard/report_export_wizard.xml',
         'wizard/fiscal_year.xml',
