@@ -20,22 +20,23 @@ class Commission_Invoice_Wizard(models.TransientModel):
             if not lab_req.is_invoiced:
                 sale_journals = self.env['account.journal'].search([('type', '=', 'sale')])
                 invoice_vals = {
-                'name': self.env['ir.sequence'].next_by_code('medical_app_inv_seq'),
-                'invoice_origin': lab_req.partner_id or '',
-                'move_type': 'out_invoice',
-                'ref': False,
-                'partner_id': lab_req.partner_id.id or False,
-                'partner_shipping_id':lab_req.partner_id.id,
-                'invoice_payment_term_id': False,
-                'fiscal_position_id': lab_req.partner_id.property_account_position_id.id,
-                'team_id': False,
-                'invoice_date': date.today(),
-                'company_id':lab_req.partner_id.company_id.id or False ,
+                    'name': self.env['ir.sequence'].next_by_code('medical_app_inv_seq'),
+                    'invoice_origin': lab_req.partner_id or '',
+                    'move_type': 'out_invoice',
+                    'ref': False,
+                    'partner_id': lab_req.partner_id.id or False,
+                    'partner_shipping_id': lab_req.partner_id.id,
+                    'invoice_payment_term_id': False,
+                    'fiscal_position_id': lab_req.partner_id.property_account_position_id.id,
+                    'team_id': False,
+                    'invoice_date': date.today(),
+                    'company_id': lab_req.partner_id.company_id.id or False,
+                    'is_commission': False,
                 }
                 res = account_invoice_obj.create(invoice_vals)
 
                 invoice_line_vals = {
-                    'product_id_selected': lab_req.product_id_selected.id ,
+                    'product_id_selected': lab_req.product_id_selected.id,
                     'qty': lab_req.qty,
                     'commission_value': lab_req.commission_value,
                     'total_commission_per_line': lab_req.total_commission_per_line,
@@ -66,5 +67,3 @@ class Commission_Invoice_Wizard(models.TransientModel):
             else:
                 raise Warning('All ready Invoiced.')
             return result
-
-

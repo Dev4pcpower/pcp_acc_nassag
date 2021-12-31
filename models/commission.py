@@ -13,3 +13,8 @@ class CommissionLine(models.Model):
         ('tobe', 'To be Invoiced'),
     ], 'Status', sort=False, readonly=True, default='tobe')
     is_invoiced = fields.Boolean(copy=False, default=False)
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    is_commission = fields.Boolean(default=False)
