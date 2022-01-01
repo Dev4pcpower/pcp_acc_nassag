@@ -14,7 +14,11 @@ class CommissionLine(models.Model):
     ], 'Status', sort=False, readonly=True, default='tobe')
     is_invoiced = fields.Boolean(copy=False, default=False)
 
+
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
     is_commission = fields.Boolean(default=False)
+
+    def action_claim(self):
+        self.is_commission = True

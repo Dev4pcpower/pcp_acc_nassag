@@ -27,6 +27,7 @@
 
         'security/analytic_security.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'views/menu_item.xml',
         'views/assets.xml',
         'views/analytic_branch.xml',
