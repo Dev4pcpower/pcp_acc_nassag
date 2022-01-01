@@ -9,7 +9,7 @@ class Commission_Invoice_Wizard(models.TransientModel):
     def create_invoice(self):
 
         active_ids = self.env.context.get('active_ids', [])
-        commission_lines = self.env['commission.line'].search([('sale_order_id','=',active_ids)])
+        commission_lines = self.env['commission.line'].search([('invoice_sale_order_id','=',active_ids)])
         list_of_ids = []
         lab_req_obj = self.env['commission.line']
         account_invoice_obj = self.env['account.move']

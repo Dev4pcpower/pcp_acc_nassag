@@ -21,4 +21,26 @@ class AccountMove(models.Model):
     is_commission = fields.Boolean(default=False)
 
     def action_claim(self):
-        self.is_commission = True
+        active_id = self.id
+        commission_lines = self.env['invoice.commission.line'].search([('invoice_sale_order_id', '=', active_id)])
+        account_debit = self.env['res.config.settings'].search([])[-1]
+        account_invoice_obj = self.env['account.move.line']
+        total = 0
+        for rec in commission_lines:
+            total += rec.total_commission_per_line
+        self.env['account.move.line'].create([
+            {
+                'name': 'claim commission',
+                'move_id': active_id,
+                'account_id': account_debit.account_commission_debit.id,
+                'debit': total,
+                'credit': 0,
+            },
+            {
+                'name': 'claim commission',
+                'move_id': active_id,
+                'account_id': account_debit.account_commission_credit.id,
+                'debit': 0,
+                'credit': total,
+            }
+        ])

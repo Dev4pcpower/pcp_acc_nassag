@@ -30,6 +30,7 @@
         'data/ir_sequence_data.xml',
         'views/menu_item.xml',
         'views/assets.xml',
+        'views/res_config_settings_views.xml',
         'views/analytic_branch.xml',
         'views/account_move.xml',
         'views/branch_analytic_line.xml',
