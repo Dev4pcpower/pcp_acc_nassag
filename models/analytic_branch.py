@@ -142,7 +142,7 @@ class BranchMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     branch_analytic_tag_ids = fields.Many2many('branch.analytic.tag', string='Analytic Branch Tags',
-                                               compute="_compute_branch_analytic_tag_ids", store=True, readonly=False,
+                                                store=True, readonly=False,
                                                check_company=True, copy=True)
 
     def _get_branch_analytic_tag_ids(self):
