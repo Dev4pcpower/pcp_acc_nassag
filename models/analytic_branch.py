@@ -119,6 +119,8 @@ class BranchAnalyticLine(models.Model):
     product_uom_category_id = fields.Many2one(related='product_uom_id.category_id', readonly=True)
     account_id = fields.Many2one('res.branch', 'Analytic Branch', required=True, ondelete='restrict',
                                  index=True, check_company=True)
+    account = fields.Many2one('account.account', 'Account Branch analytic', required=True, ondelete='restrict',
+                                 index=True, check_company=True)
     partner_id = fields.Many2one('res.partner', string='Partner', check_company=True)
     user_id = fields.Many2one('res.users', string='User', default=_default_user)
     tag_ids = fields.Many2many('branch.analytic.tag', 'branch_analytic_line_tag_rel', 'line_id', 'tag_id',
@@ -182,6 +184,7 @@ class BranchMoveLine(models.Model):
                 'name': default_name,
                 'date': move_line.date,
                 'account_id': move_line.analytic_account_id.id,
+                'account': move_line.account_id.id,
                 'group_id': move_line.analytic_account_id.group_id.id,
                 'tag_ids': [(6, 0, move_line._get_analytic_tag_ids())],
                 'unit_amount': move_line.quantity,
@@ -208,6 +211,7 @@ class BranchMoveLine(models.Model):
             'name': default_name,
             'date': self.date,
             'account_id': distribution.account_id.id,
+            'account': self.account_id.id,
             'group_id': distribution.account_id.group_id.id,
             'partner_id': self.partner_id.id,
             'tag_ids': [(6, 0, [distribution.tag_id.id] + self._get_analytic_tag_ids())],
