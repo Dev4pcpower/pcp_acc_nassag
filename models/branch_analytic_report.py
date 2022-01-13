@@ -79,7 +79,7 @@ class branch_analytic_report(models.AbstractModel):
                 'id': group.id,
                 'name': group.name,
                 'level': LOWEST_LEVEL + self._get_amount_of_parents(group),
-                'parent_id': group.parent_id.id,  # to make these fold when the original parent gets folded
+                'parent_id': group.account.id,  # to make these fold when the original parent gets folded
             })
         else:
             line.update({
@@ -97,13 +97,13 @@ class branch_analytic_report(models.AbstractModel):
         for account in analytic_accounts:
             lines.append({
                 'id': 'analytic_account_%s' % account.id,
-                'name': account.name,
+                'name': account.account.name,
                 'columns': [{'name': account.code},
-                            {'name': account.partner_id.display_name},
-                            {'name': self.format_value(account.balance)}],
+                            {'name': account.name},
+                            {'name': self.format_value(account.amount)}],
                 'level': 4,  # todo check redesign financial reports, should be level + 1 but doesn't look good
                 'unfoldable': False,
-                'caret_options': 'res.branch',
+                'caret_options': 'branch.analytic.line',
                 'parent_id': parent_id,  # to make these fold when the original parent gets folded
             })
 
@@ -118,8 +118,9 @@ class branch_analytic_report(models.AbstractModel):
         date_to = options['date']['date_to']
 
         # context is set because it's used for the debit, credit and balance computed fields
-        BranchAnalyticBranch = self.env['res.branch'].with_context(from_date=date_from,
+        BranchAnalyticBranch = self.env['branch.analytic.line'].with_context(from_date=date_from,
                                                                                    to_date=date_to)
+
         # The options refer to analytic entries. So first determine
         # the subset of analytic categories we have to search in.
         analytic_entries_domain = [('date', '>=', date_from),
@@ -131,7 +132,7 @@ class branch_analytic_report(models.AbstractModel):
         if options['analytic_accounts']:
             analytic_account_ids = [int(id) for id in options['analytic_accounts']]
             analytic_entries_domain += [('account_id', 'in', analytic_account_ids)]
-            analytic_account_domain += [('id', 'in', analytic_account_ids)]
+            analytic_account_domain += [('account_id', 'in', analytic_account_ids)]
 
         if options.get('analytic_tags'):
             analytic_tag_ids = [int(id) for id in options['analytic_tags']]
